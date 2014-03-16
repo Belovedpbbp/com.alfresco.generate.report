@@ -11,7 +11,7 @@ public class ExportReport {
 
 		if (jasperPrint == null) {
 
-			System.out.println("Cannot Export Report Because No File Report");
+			System.out.println("Cannot Export Report Because No File JasperReport");
 		} else {
 
 			JasperExportManager.exportReportToHtmlFile(jasperPrint,
