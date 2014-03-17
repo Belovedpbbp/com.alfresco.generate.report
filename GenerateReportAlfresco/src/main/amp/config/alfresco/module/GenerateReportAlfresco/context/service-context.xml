@@ -18,9 +18,6 @@
 -->
 <beans>
     
-    <!-- A simple class that is initialized by Spring -->
-    <bean id="changeme.exampleBean" class="org.alfresco.demoamp.Demo" init-method="init" />
-    
     <!-- A simple module component that will be executed once -->
     <bean id="changeme.exampleComponent" class="org.alfresco.demoamp.DemoComponent" parent="module.baseComponent" >
         <property name="moduleId" value="${project.artifactId}" />  <!-- See module.properties -->
