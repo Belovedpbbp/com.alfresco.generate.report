@@ -1,14 +1,15 @@
 package com.alfresco.generate.report;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 
 import org.apache.log4j.Logger;
 
@@ -19,13 +20,13 @@ public class GenerateReport {
 	public String generateReport(Map<String, Object> param) throws JRException,
 			IOException {
 		GenerateDatasource generateDatasource = new GenerateDatasource();
+		
+		InputStream reportFile = ClassLoader.class
+				.getResourceAsStream("/AlfrescoReport.jrxml");
 
-		File fileReport = new File(
-				"C:/Alfresco/tomcat/shared/classes/alfresco/extension/DataTemplate/AlfrescoReport.jasper");
-
-		FileInputStream reportFileName = new FileInputStream(fileReport);
-
-		JasperPrint jasperPrint = JasperFillManager.fillReport(reportFileName,
+		JasperReport compileReport = JasperCompileManager.compileReport(reportFile);
+		
+		JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport,
 				param, generateDatasource.datasource());
 
 		String destFileName = "C:/Alfresco/tomcat/shared/classes/alfresco/extension/DataTemplate/AlfrescoReport.pdf";
@@ -39,8 +40,8 @@ public class GenerateReport {
 
 			JasperExportManager
 					.exportReportToPdfFile(jasperPrint, destFileName);
-
-			returnText = "GenerateReport Complete !! in " + destFileName;
+			
+			returnText = "Complete GenerateReport";
 		}
 		return returnText;
 	}
