@@ -30,7 +30,7 @@ public class GenerateReport {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport,
 				param, generateDatasource.datasource());
 
-		String outPutFile = "C:/Alfresco/tomcat/shared/classes/alfresco/extension/DataTemplate/AlfrescoReport.pdf";
+		String outPutFile = "D:\\AlfrescoReport.pdf";
 
 		String returnText = null;
 
