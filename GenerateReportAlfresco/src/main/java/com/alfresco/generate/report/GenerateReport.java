@@ -21,6 +21,10 @@ public class GenerateReport {
 			IOException {
 		GenerateDatasource generateDatasource = new GenerateDatasource();
 
+		CatalinaPath catalinaPath = new CatalinaPath();
+		
+	
+		
 		InputStream reportFile = getClass().getResourceAsStream(
 				"/AlfrescoReport.jrxml");
 
@@ -30,7 +34,7 @@ public class GenerateReport {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport,
 				param, generateDatasource.datasource());
 
-		String outPutFile = "D:\\AlfrescoReport.pdf";
+		String outPutFile = catalinaPath.catalinaBase() + "\\AlfrescoReport.pdf";
 
 		String returnText = null;
 
