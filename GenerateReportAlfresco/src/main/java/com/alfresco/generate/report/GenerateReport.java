@@ -22,9 +22,7 @@ public class GenerateReport {
 		GenerateDatasource generateDatasource = new GenerateDatasource();
 
 		CatalinaPath catalinaPath = new CatalinaPath();
-		
-	
-		
+
 		InputStream reportFile = getClass().getResourceAsStream(
 				"/AlfrescoReport.jrxml");
 
@@ -34,13 +32,23 @@ public class GenerateReport {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport,
 				param, generateDatasource.datasource());
 
-		String outPutFile = catalinaPath.catalinaBase() + "\\AlfrescoReport.pdf";
+		String CheckSeparator = System.getProperty("file.separator");
 
 		String returnText = null;
+		String outPutFile = null;
 
-		JasperExportManager.exportReportToPdfFile(jasperPrint, outPutFile);
+		if (CheckSeparator == "\\") {
+			outPutFile = catalinaPath.catalinaBase() + "\\webapps"
+					+ "\\AlfrescoReport.pdf";
+			JasperExportManager.exportReportToPdfFile(jasperPrint, outPutFile);
+			returnText = "Complete GenerateReport on Windows";
+		} else if (CheckSeparator == "/") {
+			outPutFile = catalinaPath.catalinaBase() + "/webapps"
+					+ "/AlfrescoReport.pdf";
+			JasperExportManager.exportReportToPdfFile(jasperPrint, outPutFile);
+			returnText = "Complete GenerateReport on Unix";
+		}
 
-		returnText = "Complete GenerateReport";
 		return returnText;
 	}
 
