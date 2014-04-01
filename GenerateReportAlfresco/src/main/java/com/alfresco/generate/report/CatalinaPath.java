@@ -2,14 +2,7 @@ package com.alfresco.generate.report;
 
 public class CatalinaPath {
 	public String catalinaBase() {
-		String catalinaBase = System.getProperty("catalina.base") + "\\webapps";
+		String catalinaBase = System.getProperty("catalina.base");
 		return catalinaBase;
 	}
-	
-	
-//	public String catalinaHomeTest() {
-//		String catalinaHome = System.getProperty("catalina.home");
-//		System.out.println(catalinaHome);
-//		return catalinaHome;
-//	}
 }
