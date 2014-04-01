@@ -37,16 +37,18 @@ public class GenerateReport {
 		String returnText = null;
 		String outPutFile = null;
 
-		if (CheckSeparator == "\\") {
+		if (CheckSeparator.equals("\\")) {
 			outPutFile = catalinaPath.catalinaBase() + "\\webapps"
 					+ "\\AlfrescoReport.pdf";
 			JasperExportManager.exportReportToPdfFile(jasperPrint, outPutFile);
 			returnText = "Complete GenerateReport on Windows";
-		} else if (CheckSeparator == "/") {
+		} else if (CheckSeparator.equals("/")) {
 			outPutFile = catalinaPath.catalinaBase() + "/webapps"
 					+ "/AlfrescoReport.pdf";
 			JasperExportManager.exportReportToPdfFile(jasperPrint, outPutFile);
 			returnText = "Complete GenerateReport on Unix";
+		} else {
+			System.out.println("Not Found");
 		}
 
 		return returnText;
