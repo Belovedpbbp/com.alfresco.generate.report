@@ -8,20 +8,19 @@ import net.sf.jasperreports.engine.JRException;
 
 public class GenerateParameter {
 
-	public Map<String, Object> param(
-			Map<? extends String, ? extends Object> map) throws JRException, IOException {
-		
+	public Map<String, Object> param(Map<? extends String, ? extends Object> map)
+			throws JRException, IOException {
+
 		GenerateReport generateReport = new GenerateReport();
-		
+
 		GenerateReportonAlfresco generateReportonAlfresco = new GenerateReportonAlfresco();
-		
+
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.putAll(map);
-		
-		
+
 		generateReport.generateReport(parameters);
-		
-		generateReportonAlfresco.generateReportonAlfresco(parameters);
+
+		// generateReportonAlfresco.generateReportonAlfresco(parameters);
 		
 		return parameters;
 	}
