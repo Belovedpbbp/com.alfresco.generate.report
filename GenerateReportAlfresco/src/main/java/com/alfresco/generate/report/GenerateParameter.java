@@ -13,15 +13,11 @@ public class GenerateParameter {
 
 		GenerateReport generateReport = new GenerateReport();
 
-		GenerateReportonAlfresco generateReportonAlfresco = new GenerateReportonAlfresco();
-
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.putAll(map);
 
 		generateReport.generateReport(parameters);
 
-		// generateReportonAlfresco.generateReportonAlfresco(parameters);
-		
 		return parameters;
 	}
 }

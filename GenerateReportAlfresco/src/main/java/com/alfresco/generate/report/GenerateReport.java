@@ -32,25 +32,12 @@ public class GenerateReport {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport,
 				param, generateDatasource.datasource());
 
-		String CheckSeparator = System.getProperty("file.separator");
-
-		String returnText = null;
-		String outPutFile = null;
-
-		if (CheckSeparator.equals("\\")) {
-			outPutFile = catalinaPath.catalinaBase() + "\\webapps"
-					+ "\\AlfrescoReport.pdf";
-			JasperExportManager.exportReportToPdfFile(jasperPrint, outPutFile);
-			returnText = "Complete GenerateReport on Windows";
-		} else if (CheckSeparator.equals("/")) {
-			outPutFile = catalinaPath.catalinaBase() + "/webapps"
-					+ "/AlfrescoReport.pdf";
-			JasperExportManager.exportReportToPdfFile(jasperPrint, outPutFile);
-			returnText = "Complete GenerateReport on Unix";
-		} else {
-			System.out.println("Not Found");
-		}
-
+		String outPutFile = catalinaPath.catalinaBase() + "/webapps" + "/AlfrescoReport.pdf";
+		
+		JasperExportManager.exportReportToPdfFile(jasperPrint, outPutFile);
+		
+		String returnText = "Complete GenerateReport";
+	
 		return returnText;
 	}
 
