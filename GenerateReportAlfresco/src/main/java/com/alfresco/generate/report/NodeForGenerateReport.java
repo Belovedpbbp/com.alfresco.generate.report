@@ -1,11 +1,13 @@
 package com.alfresco.generate.report;
 
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
 
 import org.alfresco.model.ContentModel;
 import org.alfresco.repo.processor.BaseProcessorExtension;
 import org.alfresco.service.cmr.repository.ContentService;
+import org.alfresco.service.cmr.repository.ContentWriter;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.service.namespace.NamespaceService;
@@ -31,9 +33,9 @@ public class NodeForGenerateReport extends BaseProcessorExtension {
 				ContentModel.ASSOC_CONTAINS, assocQName,
 				ContentModel.PROP_CONTENT, contentProperties).getChildRef();
 
-		// ContentWriter contentWriter = contentService.getWriter(reportNodeRef,
-		// ContentModel.PROP_CONTENT, true);
-		// OutputStream reportOS = contentWriter.getContentOutputStream();
+//		 ContentWriter contentWriter = contentService.getWriter(reportNodeRef,
+//		 ContentModel.PROP_CONTENT, true);
+//		 OutputStream reportOS = contentWriter.getContentOutputStream();
 
 		return reportNodeRef;
 	}
