@@ -1,0 +1,6 @@
+<webscript>
+	<shortname>AlfrescoReport</shortname>
+	<description>WebScript For GenerateReport Alfresco Document</description>
+	<url>/com/alfresco/genreport/jsconsole/report</url>
+	<authentication>user</authentication>
+</webscript>
