@@ -121,9 +121,9 @@
 
 
 		<dependency>
-			<groupId>com.font</groupId>
+			<groupId>com.font.report</groupId>
 			<artifactId>fontreport</artifactId>
-			<version>2.6</version>
+			<version>1.0</version>
 		</dependency>
 
 	</dependencies>
