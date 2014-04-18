@@ -11,11 +11,11 @@ import org.alfresco.service.cmr.repository.NodeRef;
 
 public class ConvertJsToJava extends BaseProcessorExtension {
 
-	private JasperReportsHelper jasperReport;
+	private GenerateReport genReport;
 	private GenerateParameter generateParam;
 
-	public void setJasperReport(JasperReportsHelper jasperReport) {
-		this.jasperReport = jasperReport;
+	public void setGenReport(GenerateReport genReport) {
+		this.genReport = genReport;
 	}
 
 	public void setGenerateParam(GenerateParameter generateParam) {
@@ -34,7 +34,7 @@ public class ConvertJsToJava extends BaseProcessorExtension {
 
 			Map<String, Object> maps = generateParam.param(map);
 
-			jasperReport.generateAlfrescoReport(maps, parentOutputNodeRef,
+			genReport.generateAlfrescoReport(maps, parentOutputNodeRef,
 					output);
 		}
 

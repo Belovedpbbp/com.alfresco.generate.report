@@ -16,17 +16,20 @@
 	<bean id="convertJsToJava" class="com.alfresco.generate.report.ConvertJsToJava"
 		parent="baseJavaScriptExtension">
 		<property name="extensionName" value="convertJsToJava" />
-		<property name="jasperReport" ref="jasperReportsHelper" />
+		<property name="genReport" ref="generateReport" />
 		<property name="generateParam" ref="generateParameter" />
 
 	</bean>
 
-	<bean id="jasperReportsHelper" class="com.alfresco.generate.report.JasperReportsHelper"
+	<bean id="generateReport" class="com.alfresco.generate.report.GenerateReport"
 		parent="baseJavaScriptExtension">
-		<property name="extensionName" value="jasperReportsHelper" />
+		<property name="extensionName" value="generateReport" />
 		<property name="nodeService" ref="NodeService" />
 		<property name="contentService" ref="ContentService" />
+		<property name="emptyDataSource" ref="jrEmptyDataSource" />
 	</bean>
 
 	<bean id="generateParameter" class="com.alfresco.generate.report.GenerateParameter" />
+	<bean id="jrEmptyDataSource" class="net.sf.jasperreports.engine.JREmptyDataSource" />
+
 </beans>
