@@ -20,7 +20,7 @@ public class GenerateReport {
 	public String generateReport(Map<String, Object> param) throws JRException,
 			IOException {
 		GenerateDatasource generateDatasource = new GenerateDatasource();
-
+		
 		CatalinaPath catalinaPath = new CatalinaPath();
 
 		InputStream reportFile = getClass().getResourceAsStream(
@@ -31,14 +31,13 @@ public class GenerateReport {
 
 		JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport,
 				param, generateDatasource.datasource());
-
+		
 		String outPutFile = catalinaPath.catalinaBase() + "/webapps" + "/AlfrescoReport.pdf";
+		
 		
 		JasperExportManager.exportReportToPdfFile(jasperPrint, outPutFile);
 		
-		String returnText = "Complete GenerateReport";
-	
-		return returnText;
+		return outPutFile;
 	}
 
 }

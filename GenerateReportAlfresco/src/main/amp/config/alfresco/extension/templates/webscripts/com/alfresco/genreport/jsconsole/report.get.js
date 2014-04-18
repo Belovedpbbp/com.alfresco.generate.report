@@ -49,5 +49,3 @@ var parameter = scriptParameter.param(map);
 var genReport = scriptReport.generateReport(parameter);
 
 model.genReport = genReport;
-
-//logger.log(genReport);

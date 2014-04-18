@@ -11,12 +11,8 @@ public class GenerateParameter {
 	public Map<String, Object> param(Map<? extends String, ? extends Object> map)
 			throws JRException, IOException {
 
-		GenerateReport generateReport = new GenerateReport();
-
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.putAll(map);
-
-		generateReport.generateReport(parameters);
 
 		return parameters;
 	}

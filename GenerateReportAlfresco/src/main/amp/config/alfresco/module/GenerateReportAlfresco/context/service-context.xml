@@ -13,6 +13,20 @@
 <beans>
 
 	<!-- A simple module component that will be executed once -->
-	
+	<bean id="convertJsToJava" class="com.alfresco.generate.report.ConvertJsToJava"
+		parent="baseJavaScriptExtension">
+		<property name="extensionName" value="convertJsToJava" />
+		<property name="jasperReport" ref="jasperReportsHelper" />
+		<property name="generateParam" ref="generateParameter" />
 
+	</bean>
+
+	<bean id="jasperReportsHelper" class="com.alfresco.generate.report.JasperReportsHelper"
+		parent="baseJavaScriptExtension">
+		<property name="extensionName" value="jasperReportsHelper" />
+		<property name="nodeService" ref="NodeService" />
+		<property name="contentService" ref="ContentService" />
+	</bean>
+
+	<bean id="generateParameter" class="com.alfresco.generate.report.GenerateParameter" />
 </beans>
