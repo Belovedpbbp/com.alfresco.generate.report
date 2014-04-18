@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +14,6 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporter;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -29,6 +30,7 @@ import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
+import org.apache.chemistry.opencmis.commons.enums.VersioningState;
 import org.apache.log4j.Logger;
 
 public class GenerateReport extends BaseProcessorExtension {
@@ -72,9 +74,11 @@ public class GenerateReport extends BaseProcessorExtension {
 
 		JRExporter exporter = null;
 
-		String reportNodeName = "AlfrescoReport"
-				+ String.valueOf(System.currentTimeMillis());
-
+		Calendar calender = Calendar.getInstance();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String currentDate = dateFormat.format(calender.getTime());
+		String reportNodeName = "AlfrescoReport " + currentDate;
+		
 		if (output.equalsIgnoreCase("HTML")) {
 			exporter = new JRHtmlExporter();
 			reportNodeName += ".html";
@@ -96,7 +100,7 @@ public class GenerateReport extends BaseProcessorExtension {
 		QName assocQName = QName.createQName(
 				NamespaceService.CONTENT_MODEL_1_0_URI,
 				QName.createValidLocalName(reportNodeName));
-
+		
 		reportNodeRef = nodeService.createNode(parentOutputNodeRef,
 				ContentModel.ASSOC_CONTAINS, assocQName,
 				ContentModel.PROP_CONTENT, contentProperties).getChildRef();
@@ -104,7 +108,7 @@ public class GenerateReport extends BaseProcessorExtension {
 		ContentWriter contentWriter = contentService.getWriter(reportNodeRef,
 				ContentModel.PROP_CONTENT, true);
 		OutputStream reportOS = contentWriter.getContentOutputStream();
-
+		
 		exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
 		exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, reportOS);
 

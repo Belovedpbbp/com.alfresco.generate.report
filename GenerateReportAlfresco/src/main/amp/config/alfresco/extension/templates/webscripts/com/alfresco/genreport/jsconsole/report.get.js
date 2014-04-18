@@ -1,51 +1,38 @@
-var def =
-	{
-		query: 
-			"TYPE:"+
-			"(" + 
-				"\"cm:content\"" + 
-				"and not" + 
-				"(" +
-					"\"fm:post\"" +
-					"\"lnk:link\"" +
-					"\"ia:calendarEvent\"" +
-				")" +
-			")" +
-			
-			"and not" +
-			"(" +
-				"PATH:" +
-				"(" +
-					"\"sys:system//*\"" +
-					"\"/app:company_home/app:dictionary//*\"" +
-					"\"/app:company_home/st:sites/*/cm:dataLists//*\"" +
-					"\"/app:company_home/st:sites/*/cm:wiki//*\"" +
-					"\"/app:company_home/st:sites/*/cm:surf-config//*\"" +
-					"\"/app:company_home/st:sites/*/cm:blog//*\"" +
-				")" +
-			")"	,
-		language: "fts-alfresco"
-	};
+var def = {
+	query : "TYPE:" + "(" + "\"cm:content\"" + "and not" + "(" + "\"fm:post\""
+			+ "\"lnk:link\"" + "\"ia:calendarEvent\"" + ")" + ")" +
+
+			"and not" + "(" + "PATH:" + "(" + "\"sys:system//*\""
+			+ "\"/app:company_home/app:dictionary//*\""
+			+ "\"/app:company_home/st:sites/*/cm:dataLists//*\""
+			+ "\"/app:company_home/st:sites/*/cm:wiki//*\""
+			+ "\"/app:company_home/st:sites/*/cm:surf-config//*\""
+			+ "\"/app:company_home/st:sites/*/cm:blog//*\"" + ")" + ")",
+	language : "fts-alfresco"
+};
 var results = search.query(def);
 
 var countFile = results.length;
 
-var objCount =
-	{
-		"countFile" : countFile
-	};
+var objCount = {
+	"countFile" : countFile
+};
 
+var reportsFolderName = "AlfrescoJasperReports";
 
-var scriptConvert = new Packages.com.alfresco.generate.report.ConvertJsToJava();
+var reports = companyhome.childByNamePath(reportsFolderName);
+if (!reports)
+	reports = companyhome.createFolder(reportsFolderName);
 
-var scriptParameter = new Packages.com.alfresco.generate.report.GenerateParameter();
+var node = reports.nodeRef;
 
-var scriptReport = new Packages.com.alfresco.generate.report.GenerateReport();
+try {
+	var scriptConvert = convertJsToJava.objectToMap(objCount, node, "pdf");
 
-var map = scriptConvert.objectToMap(objCount);
+	model.genReport = "AlfrescoJasperReports - report generated. to "
+			+ reports.displayPath + "/" + reports.name;
+} catch (err) {
+	model.genReport = "AlfrescoJasperReports - error while generating report... :( "
+			+ err;
+}
 
-var parameter = scriptParameter.param(map);
-
-var genReport = scriptReport.generateReport(parameter);
-
-model.genReport = genReport;
