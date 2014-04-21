@@ -21,18 +21,31 @@ var objCount = {
 var reportsFolderName = "AlfrescoJasperReports";
 
 var reports = companyhome.childByNamePath(reportsFolderName);
-if (!reports)
+if (!reports) {
 	reports = companyhome.createFolder(reportsFolderName);
+}
 
 var node = reports.nodeRef;
 
-try {
-	var scriptConvert = convertJsToJava.objectToMap(objCount, node, "pdf");
+var calendar = new Packages.java.util.Calendar.getInstance();
 
+var simpleDateFormat = new Packages.java.text.SimpleDateFormat("yyyy-MM-dd");
+
+var currentDate = simpleDateFormat.format(calendar.getTime());
+
+var reportName = "AlfrescoReport " + currentDate + ".pdf";
+
+var i = 0;
+while (generateReport.reportExists(node, reportName)) {
+	reportName = "AfrescoReport " + currentDate + "(" + (++i) + ")" + ".pdf";
+}
+
+convertJsToJava.objectToMap(objCount, node, reportName);
+
+try {
 	model.genReport = "AlfrescoJasperReports - report generated. to "
 			+ reports.displayPath + "/" + reports.name;
 } catch (err) {
 	model.genReport = "AlfrescoJasperReports - error while generating report... :( "
 			+ err;
 }
-
