@@ -30,7 +30,6 @@ import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
 import org.alfresco.service.namespace.NamespaceService;
 import org.alfresco.service.namespace.QName;
-import org.apache.chemistry.opencmis.commons.enums.VersioningState;
 import org.apache.log4j.Logger;
 
 public class GenerateReport extends BaseProcessorExtension {
@@ -38,8 +37,17 @@ public class GenerateReport extends BaseProcessorExtension {
 	private static Logger logger = Logger.getLogger(GenerateReport.class);
 
 	private NodeService nodeService;
-	private ContentService contentService;
 	private JREmptyDataSource emptyDataSource;
+	private ContentService contentService;
+//	private JRPdfExporter pdfExporter;
+//
+//	public void setPdfExporter(JRPdfExporter pdfExporter) {
+//		this.pdfExporter = pdfExporter;
+//	}
+
+	public void setContentService(ContentService contentService) {
+		this.contentService = contentService;
+	}
 
 	public void setEmptyDataSource(JREmptyDataSource emptyDataSource) {
 		this.emptyDataSource = emptyDataSource;
@@ -49,13 +57,17 @@ public class GenerateReport extends BaseProcessorExtension {
 		this.nodeService = nodeService;
 	}
 
-	public void setContentService(ContentService contentService) {
-		this.contentService = contentService;
+	public boolean reportExists(NodeRef parentNodeRef, String reportNodeName) {
+
+		NodeRef found = nodeService.getChildByName(parentNodeRef,
+				ContentModel.ASSOC_CONTAINS, reportNodeName);
+
+		return (found != null);
 	}
 
 	public NodeRef generateAlfrescoReport(Map<String, Object> param,
-			NodeRef parentOutputNodeRef, String output) throws IOException,
-			JRException {
+			NodeRef parentOutputNodeRef, String reportNodeName)
+			throws IOException, JRException {
 
 		NodeRef reportNodeRef = null;
 
@@ -72,35 +84,34 @@ public class GenerateReport extends BaseProcessorExtension {
 		JasperPrint print = JasperFillManager.fillReport(jasperReport, param,
 				emptyDataSource);
 
-		JRExporter exporter = null;
-
-		Calendar calender = Calendar.getInstance();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String currentDate = dateFormat.format(calender.getTime());
-		String reportNodeName = "AlfrescoReport " + currentDate;
+		JRExporter pdfExporter = null;
+		pdfExporter = new JRPdfExporter();
+//		String output = ".pdf";
+//
+//		JRExporter exporter = null;
 		
-		if (output.equalsIgnoreCase("HTML")) {
-			exporter = new JRHtmlExporter();
-			reportNodeName += ".html";
-		} else if (output.equalsIgnoreCase("XLS")) {
-			exporter = new JRXlsExporter();
-			reportNodeName += ".xls";
-		} else if (output.equalsIgnoreCase("DOCX")) {
-			exporter = new JRDocxExporter();
-			reportNodeName += ".docx";
-		} else if (output.equalsIgnoreCase("PDF")) {
-			exporter = new JRPdfExporter();
-			reportNodeName += ".pdf";
-		} else {
-			throw new JRException("Unknown output format.");
-		}
+//		if (output.equalsIgnoreCase("HTML")) {
+//			exporter = new JRHtmlExporter();
+//			reportNodeName += ".html";
+//		} else if (output.equalsIgnoreCase("XLS")) {
+//			exporter = new JRXlsExporter();
+//			reportNodeName += ".xls";
+//		} else if (output.equalsIgnoreCase("DOCX")) {
+//			exporter = new JRDocxExporter();
+//			reportNodeName += ".docx";
+//		} else if (output.equalsIgnoreCase("PDF")) {
+//			exporter = new JRPdfExporter();
+//			reportNodeName += ".pdf";
+//		} else {
+//			throw new JRException("Unknown output format.");
+//		}
 
 		HashMap<QName, Serializable> contentProperties = new HashMap<QName, Serializable>();
 		contentProperties.put(ContentModel.PROP_NAME, reportNodeName);
 		QName assocQName = QName.createQName(
 				NamespaceService.CONTENT_MODEL_1_0_URI,
 				QName.createValidLocalName(reportNodeName));
-		
+
 		reportNodeRef = nodeService.createNode(parentOutputNodeRef,
 				ContentModel.ASSOC_CONTAINS, assocQName,
 				ContentModel.PROP_CONTENT, contentProperties).getChildRef();
@@ -108,12 +119,12 @@ public class GenerateReport extends BaseProcessorExtension {
 		ContentWriter contentWriter = contentService.getWriter(reportNodeRef,
 				ContentModel.PROP_CONTENT, true);
 		OutputStream reportOS = contentWriter.getContentOutputStream();
-		
-		exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
-		exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, reportOS);
+
+		pdfExporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
+		pdfExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, reportOS);
 
 		try {
-			exporter.exportReport();
+			pdfExporter.exportReport();
 		} catch (JRException e) {
 			nodeService.deleteNode(reportNodeRef);
 			throw e;

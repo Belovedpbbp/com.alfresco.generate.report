@@ -27,8 +27,10 @@
 		<property name="nodeService" ref="NodeService" />
 		<property name="contentService" ref="ContentService" />
 		<property name="emptyDataSource" ref="jrEmptyDataSource" />
+		<!-- property name="pdfExporter" ref="jrPdfExporter" / -->
 	</bean>
-
+	<!-- bean id="jrPdfExporter" class="net.sf.jasperreports.engine.export.JRPdfExporter" 
+		/ -->
 	<bean id="generateParameter" class="com.alfresco.generate.report.GenerateParameter" />
 	<bean id="jrEmptyDataSource" class="net.sf.jasperreports.engine.JREmptyDataSource" />
 

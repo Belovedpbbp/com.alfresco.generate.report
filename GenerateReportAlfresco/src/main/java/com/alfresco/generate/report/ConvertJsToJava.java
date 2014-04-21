@@ -24,7 +24,7 @@ public class ConvertJsToJava extends BaseProcessorExtension {
 
 	@SuppressWarnings({ "unchecked" })
 	public Map<? extends String, ? extends Object> objectToMap(Object jsObject,
-			NodeRef parentOutputNodeRef, String output) throws JRException,
+			NodeRef parentOutputNodeRef, String reportNodeName) throws JRException,
 			IOException {
 
 		Object javaObject = new ValueConverter().convertValueForJava(jsObject);
@@ -35,7 +35,7 @@ public class ConvertJsToJava extends BaseProcessorExtension {
 			Map<String, Object> maps = generateParam.param(map);
 
 			genReport.generateAlfrescoReport(maps, parentOutputNodeRef,
-					output);
+					reportNodeName);
 		}
 
 		return map;
