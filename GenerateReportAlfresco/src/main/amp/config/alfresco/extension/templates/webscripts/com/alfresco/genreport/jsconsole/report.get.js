@@ -36,16 +36,38 @@ var objCount =
 	};
 
 
-var scriptConvert = new Packages.com.alfresco.generate.report.ConvertJsToJava();
+var reportsFolderName = "AlfrescoJasperReports";
 
-var scriptParameter = new Packages.com.alfresco.generate.report.GenerateParameter();
+var reports = companyhome.childByNamePath(reportsFolderName);
+if (!reports) {
+    reports = companyhome.createFolder(reportsFolderName);
+}
 
-var scriptReport = new Packages.com.alfresco.generate.report.GenerateReport();
+var nodeReportName = reports.nodeRef;
 
-var map = scriptConvert.objectToMap(objCount);
+var calendar = new Packages.java.util.Calendar.getInstance();
 
-var parameter = scriptParameter.param(map);
+var simpleDateFormat = new Packages.java.text.SimpleDateFormat("yyyy-MM-dd");
 
-var genReport = scriptReport.generateReport(parameter);
+var currentDate = simpleDateFormat.format(calendar.getTime());
 
-model.genReport = genReport;
+var reportName = "AlfrescoReport " + currentDate + ".pdf";
+
+var i = 0;
+while (generateReport.reportExists(nodeReportName, reportName)) {
+    reportName = "AfrescoReport " + currentDate + " (" + (++i) + ")" + ".pdf";
+}
+try {
+	var convert = convertJsToJava.objectToMap(objCount);
+	
+	var parameter = generateParameter.param(convert);
+	
+	var reportNodeRef = generateReport.generateAlfrescoReport(parameter, nodeReportName, reportName);
+
+	var generatedReport = search.findNode(reportNodeRef);
+	
+	model.genReport = "AlfrescoJasperReports - report generated. " + generatedReport.displayPath + "/" + generatedReport.name;
+
+} catch(err) {
+	model.genReport = "AlfrescoJasperReports - error while generating report... :( " + err;
+}
