@@ -18,20 +18,37 @@
 	<bean id="convertJsToJava" class="com.alfresco.generate.report.ConvertJsToJava"
 		parent="baseJavaScriptExtension">
 		<property name="extensionName" value="convertJsToJava" />
+<<<<<<< HEAD
 		<!--  property name="genReport" ref="generateReport" />
 		<property name="generateParam" ref="generateParameter" /-->
 
 	</bean>
 
+=======
+	</bean>
+	
+>>>>>>> find
 	<bean id="generateReport" class="com.alfresco.generate.report.GenerateReport"
 		parent="baseJavaScriptExtension">
 		<property name="extensionName" value="generateReport" />
 		<property name="nodeService" ref="NodeService" />
 		<property name="contentService" ref="ContentService" />
+<<<<<<< HEAD
 		<property name="emptyDataSource" ref="jrEmptyDataSource" />
 		<!-- property name="pdfExporter" ref="jrPdfExporter" / -->
+=======
+		<property name="exporter" ref="pdfExporter" />
 	</bean>
+	
+	<bean id="generateParameter" class="com.alfresco.generate.report.GenerateParameter"
+		parent="baseJavaScriptExtension">
+		<property name="extensionName" value="generateParameter" />
+>>>>>>> find
+	</bean>
+	
+	<bean id="pdfExporter" class="net.sf.jasperreports.engine.export.JRPdfExporter" />
 
+<<<<<<< HEAD
 	<!-- bean id="jrPdfExporter" class="net.sf.jasperreports.engine.export.JRPdfExporter" 
 		/ -->
 	<bean id="jrEmptyDataSource" class="net.sf.jasperreports.engine.JREmptyDataSource" />
@@ -44,4 +61,6 @@
 	
 
 >>>>>>> parent of 5252dcf... สร้าง Report บนน Alfresco ได้เรียบร้อยแล้ว ขั้นตอนต่อไป แก้ไข Code
+=======
+>>>>>>> find
 </beans>

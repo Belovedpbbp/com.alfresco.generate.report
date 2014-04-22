@@ -3,11 +3,16 @@ package com.alfresco.generate.report;
 import java.util.Map;
 
 import org.alfresco.repo.jscript.ValueConverter;
+<<<<<<< HEAD
+=======
+import org.alfresco.repo.processor.BaseProcessorExtension;
+>>>>>>> find
 
 <<<<<<< HEAD
 <<<<<<< HEAD
 public class ConvertJsToJava extends BaseProcessorExtension {
 
+<<<<<<< HEAD
 	// private GenerateReport genReport;
 	// private GenerateParameter generateParam;
 
@@ -41,11 +46,17 @@ public class ConvertJsToJava {
 >>>>>>> parent of 5252dcf... สร้าง Report บนน Alfresco ได้เรียบร้อยแล้ว ขั้นตอนต่อไป แก้ไข Code
 =======
 >>>>>>> parent of 5252dcf... สร้าง Report บนน Alfresco ได้เรียบร้อยแล้ว ขั้นตอนต่อไป แก้ไข Code
+=======
+	@SuppressWarnings({ "unchecked" })
+	public Map<? extends String, ? extends Object> objectToMap(Object jsObject) throws JRException,
+			IOException {
+>>>>>>> find
 
 		Object javaObject = new ValueConverter().convertValueForJava(jsObject);
 		Map<? extends String, ? extends Object> map = null;
 		if (javaObject instanceof Map) {
 			map = (Map<? extends String, ? extends Object>) javaObject;
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -62,6 +73,8 @@ public class ConvertJsToJava {
 			generateParameter.param(map);
 
 >>>>>>> parent of 5252dcf... สร้าง Report บนน Alfresco ได้เรียบร้อยแล้ว ขั้นตอนต่อไป แก้ไข Code
+=======
+>>>>>>> find
 		}
 
 		return map;
