@@ -16,8 +16,8 @@
 	<bean id="convertJsToJava" class="com.alfresco.generate.report.ConvertJsToJava"
 		parent="baseJavaScriptExtension">
 		<property name="extensionName" value="convertJsToJava" />
-		<property name="genReport" ref="generateReport" />
-		<property name="generateParam" ref="generateParameter" />
+		<!--  property name="genReport" ref="generateReport" />
+		<property name="generateParam" ref="generateParameter" /-->
 
 	</bean>
 
@@ -29,9 +29,9 @@
 		<property name="emptyDataSource" ref="jrEmptyDataSource" />
 		<!-- property name="pdfExporter" ref="jrPdfExporter" / -->
 	</bean>
+
 	<!-- bean id="jrPdfExporter" class="net.sf.jasperreports.engine.export.JRPdfExporter" 
 		/ -->
-	<bean id="generateParameter" class="com.alfresco.generate.report.GenerateParameter" />
 	<bean id="jrEmptyDataSource" class="net.sf.jasperreports.engine.JREmptyDataSource" />
 
 </beans>
