@@ -69,6 +69,9 @@ public class GenerateReport extends BaseProcessorExtension {
 		String returnText = "Complete GenerateReport";
 	
 		return returnText;
+<<<<<<< HEAD
+>>>>>>> parent of 5252dcf... สร้าง Report บนน Alfresco ได้เรียบร้อยแล้ว ขั้นตอนต่อไป แก้ไข Code
+=======
 >>>>>>> parent of 5252dcf... สร้าง Report บนน Alfresco ได้เรียบร้อยแล้ว ขั้นตอนต่อไป แก้ไข Code
 	}
 

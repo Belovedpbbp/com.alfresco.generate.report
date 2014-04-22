@@ -127,8 +127,11 @@
 		</dependency>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		<!-- dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-data-jpa</artifactId> 
 			<version>1.0.0.RELEASE</version> </dependency -->
+=======
+>>>>>>> parent of 5252dcf... สร้าง Report บนน Alfresco ได้เรียบร้อยแล้ว ขั้นตอนต่อไป แก้ไข Code
 =======
 >>>>>>> parent of 5252dcf... สร้าง Report บนน Alfresco ได้เรียบร้อยแล้ว ขั้นตอนต่อไป แก้ไข Code
 	</dependencies>

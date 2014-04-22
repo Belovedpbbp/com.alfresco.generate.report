@@ -45,4 +45,7 @@ var genReport = scriptReport.generateReport(parameter);
 model.genReport = genReport;
 
 //logger.log(genReport);
+<<<<<<< HEAD
+>>>>>>> parent of 5252dcf... สร้าง Report บนน Alfresco ได้เรียบร้อยแล้ว ขั้นตอนต่อไป แก้ไข Code
+=======
 >>>>>>> parent of 5252dcf... สร้าง Report บนน Alfresco ได้เรียบร้อยแล้ว ขั้นตอนต่อไป แก้ไข Code
