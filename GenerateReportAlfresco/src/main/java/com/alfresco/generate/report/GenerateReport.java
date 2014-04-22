@@ -29,9 +29,17 @@ import org.apache.log4j.Logger;
 public class GenerateReport extends BaseProcessorExtension {
 	private static Logger logger = Logger.getLogger(GenerateReport.class);
 
+<<<<<<< HEAD
 	private NodeService nodeService;
 	private JREmptyDataSource emptyDataSource;
 	private ContentService contentService;
+=======
+	public String generateReport(Map<String, Object> param) throws JRException,
+			IOException {
+		GenerateDatasource generateDatasource = new GenerateDatasource();
+
+		CatalinaPath catalinaPath = new CatalinaPath();
+>>>>>>> parent of 5252dcf... สร้าง Report บนน Alfresco ได้เรียบร้อยแล้ว ขั้นตอนต่อไป แก้ไข Code
 
 	// private JRPdfExporter pdfExporter;
 	//
@@ -43,12 +51,25 @@ public class GenerateReport extends BaseProcessorExtension {
 		this.contentService = contentService;
 	}
 
+<<<<<<< HEAD
 	public void setEmptyDataSource(JREmptyDataSource emptyDataSource) {
 		this.emptyDataSource = emptyDataSource;
 	}
 
 	public void setNodeService(NodeService nodeService) {
 		this.nodeService = nodeService;
+=======
+		JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport,
+				param, generateDatasource.datasource());
+
+		String outPutFile = catalinaPath.catalinaBase() + "/webapps" + "/AlfrescoReport.pdf";
+		
+		JasperExportManager.exportReportToPdfFile(jasperPrint, outPutFile);
+		
+		String returnText = "Complete GenerateReport";
+	
+		return returnText;
+>>>>>>> parent of 5252dcf... สร้าง Report บนน Alfresco ได้เรียบร้อยแล้ว ขั้นตอนต่อไป แก้ไข Code
 	}
 
 	public boolean reportExists(NodeRef parentNodeRef, String reportNodeName) {

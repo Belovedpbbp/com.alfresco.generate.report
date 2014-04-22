@@ -13,6 +13,7 @@
 <beans>
 
 	<!-- A simple module component that will be executed once -->
+<<<<<<< HEAD
 	<bean id="convertJsToJava" class="com.alfresco.generate.report.ConvertJsToJava"
 		parent="baseJavaScriptExtension">
 		<property name="extensionName" value="convertJsToJava" />
@@ -34,4 +35,8 @@
 		/ -->
 	<bean id="jrEmptyDataSource" class="net.sf.jasperreports.engine.JREmptyDataSource" />
 
+=======
+	
+
+>>>>>>> parent of 5252dcf... สร้าง Report บนน Alfresco ได้เรียบร้อยแล้ว ขั้นตอนต่อไป แก้ไข Code
 </beans>

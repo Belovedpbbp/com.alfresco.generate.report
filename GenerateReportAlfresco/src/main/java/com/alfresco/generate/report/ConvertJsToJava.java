@@ -3,9 +3,8 @@ package com.alfresco.generate.report;
 import java.util.Map;
 
 import org.alfresco.repo.jscript.ValueConverter;
-import org.alfresco.repo.processor.BaseProcessorExtension;
-import org.alfresco.service.cmr.repository.NodeRef;
 
+<<<<<<< HEAD
 public class ConvertJsToJava extends BaseProcessorExtension {
 
 	// private GenerateReport genReport;
@@ -24,20 +23,33 @@ public class ConvertJsToJava extends BaseProcessorExtension {
 	@SuppressWarnings({ "unchecked" })
 	public Map<? extends String, ? extends Object> objectToMap(Object jsObject,
 			NodeRef parentOutputNodeRef, String reportNodeName) {
+=======
+public class ConvertJsToJava {
+
+	@SuppressWarnings({ "unchecked" })
+	public Map<? extends String, ? extends Object> objectToMap(Object jsObject)
+			throws JRException, IOException {
+
+		GenerateParameter generateParameter = new GenerateParameter();
+>>>>>>> parent of 5252dcf... สร้าง Report บนน Alfresco ได้เรียบร้อยแล้ว ขั้นตอนต่อไป แก้ไข Code
 
 		Object javaObject = new ValueConverter().convertValueForJava(jsObject);
 		Map<? extends String, ? extends Object> map = null;
 		if (javaObject instanceof Map) {
 			map = (Map<? extends String, ? extends Object>) javaObject;
 
+<<<<<<< HEAD
 			// Map<String, Object> maps = generateParam.param(map);
 			//
 			// NodeRef nodeRef = genReport.generateAlfrescoReport(maps,
 			// parentOutputNodeRef, reportNodeName);
 			// logger.warn(nodeRef.toString());
+=======
+			generateParameter.param(map);
+
+>>>>>>> parent of 5252dcf... สร้าง Report บนน Alfresco ได้เรียบร้อยแล้ว ขั้นตอนต่อไป แก้ไข Code
 		}
 
 		return map;
 	}
-
 }

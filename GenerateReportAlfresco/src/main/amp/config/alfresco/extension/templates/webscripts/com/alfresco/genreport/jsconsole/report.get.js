@@ -36,3 +36,13 @@ try {
 			+ err;
 }
 
+<<<<<<< HEAD
+=======
+var parameter = scriptParameter.param(map);
+
+var genReport = scriptReport.generateReport(parameter);
+
+model.genReport = genReport;
+
+//logger.log(genReport);
+>>>>>>> parent of 5252dcf... สร้าง Report บนน Alfresco ได้เรียบร้อยแล้ว ขั้นตอนต่อไป แก้ไข Code
